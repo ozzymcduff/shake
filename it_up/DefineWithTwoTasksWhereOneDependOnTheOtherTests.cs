@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Linq;
 using NUnit.Framework;
 
 namespace Shake.It.Up
@@ -40,12 +41,12 @@ namespace Shake.It.Up
         [Test]
         public void It_should_have_two_tasks()
         {
-            Assert.That(definition.Tasks, Is.EqualTo(2));
+            Assert.That(definition.Tasks.Count(), Is.EqualTo(2));
         }
         [Test]
         public void Build_should_depend_on_check()
         {
-            Assert.That(definition.TasksWithName("Build"), Is.EqualTo(2));
+            Assert.That(definition.TasksWithName("Build").DependsOn, Is.EquivalentTo(new []{"Check"}));
         }
     }
 }

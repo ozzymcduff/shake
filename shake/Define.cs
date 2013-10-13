@@ -21,17 +21,33 @@ namespace Shake
             define(d);
             return d;
         }
-
         public void Task(string name, Action<Task> action, params string[] depends)
         {
-            _tasks.Add(name,new RunLambdaTask(action));
+            var task = new RunLambdaTask(action);
+            if (null != depends)
+            {
+                task.DependsOn.AddRange(depends);
+            }
+            _tasks.Add(name, task);
         }
 
         public void Task(string name, Func<Task> action, params string[] depends)
         {
-            _tasks.Add(name, action());//This is wrong should not execute yet
+            var task = new WrappedTask(action);
+            if (null != depends)
+            {
+                task.DependsOn.AddRange(depends);
+            }
+            _tasks.Add(name, task);
         }
-
+        public void Task(string name, Task task, params string[] depends)
+        {
+            if (null != depends)
+            {
+                task.DependsOn.AddRange(depends);
+            }
+            _tasks.Add(name, task);
+        }
         public IEnumerable<Task> Tasks
         {
             get { return _tasks.Values; }
@@ -45,14 +61,38 @@ namespace Shake
 
     public class RunLambdaTask : Task
     {
+        private Action<Task> _action;
         public RunLambdaTask(Action<Task> action)
         {
-            throw new NotImplementedException();
+            _action = action;
         }
 
         public override int Execute()
         {
-            throw new NotImplementedException();
+            try
+            {
+                _action(this);
+                return 0;
+            }
+            catch (Exception e)
+            {
+                Console.Error.WriteLine(e.Message);
+                return 1;
+            }
+        }
+    }
+    public class WrappedTask:Task
+    {
+        private Func<Task> action;
+
+        public WrappedTask(Func<Task> action)
+        {
+            this.action = action;
+        }
+
+        public override int Execute()
+        {
+            return action().Execute();
         }
     }
 }

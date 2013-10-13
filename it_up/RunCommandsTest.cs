@@ -8,7 +8,7 @@ namespace Shake.It.Up
         [Test]
         public void Test()
         {
-
+            Assert.Fail("Not implemented!");
         }
     }
 }
