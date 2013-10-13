@@ -8,22 +8,51 @@ namespace Shake
 {
     public class Define
     {
+        private Dictionary<string, Task> _tasks;
+
+        public Define()
+        {
+            _tasks = new Dictionary<string, Task>(StringComparer.InvariantCultureIgnoreCase);
+        }
+
         public static Define It (Action<Define> define)
         {
-            throw new NotImplementedException();
+            var d = new Define();
+            define(d);
+            return d;
         }
 
         public void Task(string name, Action<Task> action, params string[] depends)
         {
-            throw new NotImplementedException();
+            _tasks.Add(name,new RunLambdaTask(action));
+        }
+
+        public void Task(string name, Func<Task> action, params string[] depends)
+        {
+            _tasks.Add(name, action());//This is wrong should not execute yet
         }
 
         public IEnumerable<Task> Tasks
         {
-            get
-            {
-                throw new NotImplementedException();
-            }
+            get { return _tasks.Values; }
+        }
+
+        public Task TasksWithName(string name)
+        {
+            return _tasks[name];
+        }
+    }
+
+    public class RunLambdaTask : Task
+    {
+        public RunLambdaTask(Action<Task> action)
+        {
+            throw new NotImplementedException();
+        }
+
+        public override int Execute()
+        {
+            throw new NotImplementedException();
         }
     }
 }

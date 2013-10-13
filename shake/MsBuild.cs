@@ -4,7 +4,7 @@ using Shake.Infrastructure;
 
 namespace Shake
 {
-    public class MsBuild
+    public class MsBuild:Task
     {
         public string Solution { get; set; }
         public string Verbosity { get; set; }
@@ -16,17 +16,19 @@ namespace Shake
             get { throw new NotImplementedException("!"); }
             set { _properties = ReflectionHelper.ObjectToDictionary(value); }
         }
-        private IDictionary<string, object> _properties { get; set; }
+
+        private IDictionary<string, object> _properties;
         public object OtherSwitches
         {
             get { throw new NotImplementedException("!"); }
             set { _otherSwitches = ReflectionHelper.ObjectToDictionary(value); }
         }
-        private IDictionary<string, object> _otherSwitches { get; set; }
+
+        private IDictionary<string, object> _otherSwitches;
         private bool _nologo = false;
-        public void Execute()
+        public override int Execute()
         {
-            BuildSolution(Solution);
+            return BuildSolution(Solution);
         }
 
         public void NoLogo()
@@ -34,9 +36,9 @@ namespace Shake
             _nologo = true;
         }
 
-        public void BuildSolution(string solution)
+        public int BuildSolution(string solution)
         {
-            check_solution(Solution);
+            CheckSolution(Solution);
 
             var commandParameters = new List<string>();
             commandParameters.Add(String.Format("\"{0}\"", Solution));
@@ -73,14 +75,14 @@ namespace Shake
             }
             run.FileName = "msbuild";
             run.Arguments = String.Join(" ", commandParameters);
-            Environment.Exit(run.Execute());
+            return (run.Execute());
             //result = run_command "MSBuild", commandParameters.join(" ")
 
             //failure_message = 'MSBuild Failed. See Build Log For Detail'
             //fail_with_message failure_message if !result
         }
 
-        private void check_solution(string file)
+        private static void CheckSolution(string file)
         {
             if (!String.IsNullOrEmpty(file)) return;
             throw new Exception("solution cannot be nil");

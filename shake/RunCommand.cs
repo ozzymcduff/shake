@@ -6,7 +6,7 @@ using System.Dynamic;
 
 namespace Shake
 {
-    public class RunCommand
+    public class RunCommand:Task
     {
         public class ParameterDictionary : DynamicObject
         {
@@ -68,14 +68,16 @@ namespace Shake
         public string FileName { get; set; }
         public string Arguments { get; set; }
         public dynamic Params { get; private set; }
-        public int Execute()
+        public override int Execute()
         {
-            var startInfo = new ProcessStartInfo();
-            startInfo.FileName = FileName;
-            startInfo.CreateNoWindow = true;
-            startInfo.RedirectStandardOutput = true;
-            startInfo.UseShellExecute = false;
-            startInfo.Arguments = Arguments + " " + DoRenderParams();
+            var startInfo = new ProcessStartInfo
+                                {
+                                    FileName = FileName,
+                                    CreateNoWindow = true,
+                                    RedirectStandardOutput = true,
+                                    UseShellExecute = false,
+                                    Arguments = Arguments + " " + DoRenderParams()
+                                };
             try
             {
                 using (Process exeProcess = Process.Start(startInfo))

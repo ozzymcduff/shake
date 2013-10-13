@@ -5,8 +5,8 @@ using System.Text;
 
 namespace Shake
 {
-    public class Task
+    public abstract class Task
     {
-
+        public abstract int Execute();
     }
 }

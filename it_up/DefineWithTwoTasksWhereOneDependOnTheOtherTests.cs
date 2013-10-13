@@ -1,7 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
 using NUnit.Framework;
 
 namespace Shake.It.Up
@@ -18,13 +15,12 @@ namespace Shake.It.Up
             {
                 d.Task("Check", t => Console.WriteLine("Check"));
 
-                d.Task("Build", t => new MsBuild
+                d.Task("Build", () => new MsBuild
                 {
                     Solution = @"C:\project\somesolution.sln",
                     MaxCpuCount = 2,
                     Properties = new { }
-                },
-                    "Check");
+                }, "Check");
                 /*
                 d.Task
                     .Check()
@@ -45,6 +41,11 @@ namespace Shake.It.Up
         public void It_should_have_two_tasks()
         {
             Assert.That(definition.Tasks, Is.EqualTo(2));
+        }
+        [Test]
+        public void Build_should_depend_on_check()
+        {
+            Assert.That(definition.TasksWithName("Build"), Is.EqualTo(2));
         }
     }
 }
