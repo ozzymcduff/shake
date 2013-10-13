@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using Shake.Infrastructure;
 
 namespace Shake
 {
@@ -8,10 +9,20 @@ namespace Shake
         public string Solution { get; set; }
         public string Verbosity { get; set; }
         public string Loggermodule { get; set; }
-        public string MaxCpuCount { get; set; }
+        public int? MaxCpuCount { get; set; }
         public string[] Targets { get; set; }
-        public IDictionary<string, object> Properties { get; set; }
-        public IDictionary<string, string> OtherSwitches { get; set; }
+        public object Properties
+        {
+            get { throw new NotImplementedException("!"); }
+            set { _properties = ReflectionHelper.ObjectToDictionary(value); }
+        }
+        private IDictionary<string, object> _properties { get; set; }
+        public object OtherSwitches
+        {
+            get { throw new NotImplementedException("!"); }
+            set { _otherSwitches = ReflectionHelper.ObjectToDictionary(value); }
+        }
+        private IDictionary<string, object> _otherSwitches { get; set; }
         private bool _nologo = false;
         public void Execute()
         {
@@ -30,7 +41,7 @@ namespace Shake
             var commandParameters = new List<string>();
             commandParameters.Add(String.Format("\"{0}\"", Solution));
 
-            if (null != Properties)
+            if (null != _properties)
             {
                 commandParameters.Add(GetBuildProperties());
             }
@@ -40,9 +51,9 @@ namespace Shake
             {
                 run.Params.NoLogo = true;
             }
-            if (null != OtherSwitches)
+            if (null != _otherSwitches)
             {
-                run.Params.AddRange(OtherSwitches);
+                run.Params.AddRange(_otherSwitches);
             }
             if (!String.IsNullOrEmpty(Verbosity))
             {
@@ -52,7 +63,7 @@ namespace Shake
             {
                 run.Params.Loggermodule = Loggermodule;
             }
-            if (!String.IsNullOrEmpty(MaxCpuCount))
+            if (MaxCpuCount.HasValue)
             {
                 run.Params.MaxCpuCount = MaxCpuCount;
             }
@@ -78,7 +89,7 @@ namespace Shake
         private string GetBuildProperties()
         {
             var optionText = new List<string>();
-            foreach (var kv in Properties)
+            foreach (var kv in _properties)
             {
                 optionText.Add(String.Format("/p:{0}=\"{1}\"", kv.Key, kv.Value));
             }
