@@ -57,42 +57,57 @@ namespace Shake
         {
             return _tasks[name];
         }
-    }
 
-    public class RunLambdaTask : Task
-    {
-        private Action<Task> _action;
-        public RunLambdaTask(Action<Task> action)
+        public class RunLambdaTask : Task
         {
-            _action = action;
-        }
-
-        public override int Execute()
-        {
-            try
+            private Action<Task> _action;
+            public RunLambdaTask(Action<Task> action)
             {
-                _action(this);
-                return 0;
+                _action = action;
             }
-            catch (Exception e)
+
+            public override int Execute()
             {
-                Console.Error.WriteLine(e.Message);
-                return 1;
+                try
+                {
+                    _action(this);
+                    return 0;
+                }
+                catch (Exception e)
+                {
+                    Console.Error.WriteLine(e.Message);
+                    return 1;
+                }
             }
         }
-    }
-    public class WrappedTask:Task
-    {
-        private Func<Task> action;
-
-        public WrappedTask(Func<Task> action)
+        public class WrappedTask : Task
         {
-            this.action = action;
+            private Func<Task> action;
+
+            public WrappedTask(Func<Task> action)
+            {
+                this.action = action;
+            }
+
+            public override int Execute()
+            {
+                return action().Execute();
+            }
         }
 
-        public override int Execute()
+        public int ExecuteTasksWithName(string name)
         {
-            return action().Execute();
+            var task = _tasks[name];
+            foreach (var dependingTask in task.DependsOn)
+            {
+                var retval = ExecuteTasksWithName(dependingTask);
+                if (retval != 0) 
+                {
+                    return retval;
+                }
+            }
+            return task.Execute();
         }
     }
+
 }
