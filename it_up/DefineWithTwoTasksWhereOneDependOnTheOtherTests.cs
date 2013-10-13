@@ -35,14 +35,6 @@ namespace Shake.It.Up
                         Properties = new { }
                     };
                 }, "Check");
-                /*
-                d.Task
-                    .Check()
-                d.Task
-                    .Depends(t=>t.Check())
-                    .Build()
-                    ;
-                 */
             });
         }
 
@@ -59,7 +51,8 @@ namespace Shake.It.Up
         [Test]
         public void Build_should_depend_on_check()
         {
-            Assert.That(definition.TasksWithName("Build").DependsOn, Is.EquivalentTo(new []{"Check"}));
+            Assert.That(definition.TasksWithName("Build").DependsOn, 
+                Is.EquivalentTo(new []{"Check"}));
         }
         [Test]
         public void When_executing_task_should_execute_the_task_that_it_depends_on() 
@@ -67,6 +60,13 @@ namespace Shake.It.Up
             definition.ExecuteTasksWithName("Build");
             Assert.That(checkExecuted);
             Assert.That(buildExecuted);
+        }
+        [Test]
+        public void When_executing_task_that_does_not_depend_on_another_task() 
+        {
+            definition.ExecuteTasksWithName("Check");
+            Assert.That(checkExecuted);
+            Assert.That(!buildExecuted);
         }
     }
 }

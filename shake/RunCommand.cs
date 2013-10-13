@@ -3,6 +3,8 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Diagnostics;
 using System.Dynamic;
+using System.IO;
+using Shake.Infrastructure;
 
 namespace Shake
 {
@@ -11,7 +13,7 @@ namespace Shake
         public class ParameterDictionary : DynamicObject
         {
             private IDictionary<string, object> dic =
-                new Dictionary<string, object>();
+                new Dictionary<string, object>(StringComparer.InvariantCultureIgnoreCase);
             public override bool TrySetMember(SetMemberBinder binder, object value)
             {
                 dic[binder.Name] = value;
@@ -60,14 +62,23 @@ namespace Shake
 
         public RunCommand(RenderParams renderParams = RenderParams.AsSlash)
         {
-            Params = new ParameterDictionary();
+            _params = new ParameterDictionary();
             Arguments = string.Empty;
             _renderParams = renderParams;
+            Out = Console.Out;
+            Error = Console.Error;
         }
+        private ParameterDictionary _params;
         private readonly RenderParams _renderParams;
         public string FileName { get; set; }
         public string Arguments { get; set; }
-        public dynamic Params { get; private set; }
+        public dynamic Params 
+        { 
+            get { return _params; }
+            set { _params.AddRange(ReflectionHelper.ObjectToDictionary(value)); } 
+        }
+        public TextWriter Out { get; set; }
+        public TextWriter Error { get; set; }
         public override int Execute()
         {
             var startInfo = new ProcessStartInfo
@@ -75,6 +86,7 @@ namespace Shake
                                     FileName = FileName,
                                     CreateNoWindow = true,
                                     RedirectStandardOutput = true,
+                                    RedirectStandardError = true,
                                     UseShellExecute = false,
                                     Arguments = Arguments + " " + DoRenderParams()
                                 };
@@ -82,14 +94,15 @@ namespace Shake
             {
                 using (Process exeProcess = Process.Start(startInfo))
                 {
-                    Console.WriteLine(exeProcess.StandardOutput.ReadToEnd());
+                    Out.WriteLine(exeProcess.StandardOutput.ReadToEnd());
+                    Error.WriteLine(exeProcess.StandardError.ReadToEnd());
                     exeProcess.WaitForExit();
                     return exeProcess.ExitCode;
                 }
             }
             catch (Exception e)
             {
-                Console.Error.WriteLine(e.Message);
+                Error.WriteLine(e.Message);
                 return 1;
             }
         }

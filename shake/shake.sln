@@ -1,9 +1,13 @@
 ﻿
-Microsoft Visual Studio Solution File, Format Version 11.00
-# Visual Studio 2010
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 2013
+VisualStudioVersion = 12.0.20827.3
+MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "shake", "shake.csproj", "{B8141FE0-8CB6-4B7E-A68A-C9578D9FA760}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "it_up", "..\it_up\it_up.csproj", "{809B54B4-0BC3-4CC9-968A-4DFEECDED0A8}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "writeline", "..\writeline\writeline.csproj", "{016991B4-C1C1-407B-837B-11B9CE1C1A26}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -19,6 +23,10 @@ Global
 		{809B54B4-0BC3-4CC9-968A-4DFEECDED0A8}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{809B54B4-0BC3-4CC9-968A-4DFEECDED0A8}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{809B54B4-0BC3-4CC9-968A-4DFEECDED0A8}.Release|Any CPU.Build.0 = Release|Any CPU
+		{016991B4-C1C1-407B-837B-11B9CE1C1A26}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{016991B4-C1C1-407B-837B-11B9CE1C1A26}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{016991B4-C1C1-407B-837B-11B9CE1C1A26}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{016991B4-C1C1-407B-837B-11B9CE1C1A26}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
