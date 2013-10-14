@@ -53,13 +53,13 @@
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\shake\shake.csproj">
+    <ProjectReference Include="..\shake\Shake.csproj">
       <Project>{B8141FE0-8CB6-4B7E-A68A-C9578D9FA760}</Project>
-      <Name>shake</Name>
+      <Name>Shake</Name>
     </ProjectReference>
-    <ProjectReference Include="..\writeline\writeline.csproj">
+    <ProjectReference Include="..\writeline\WriteLine.csproj">
       <Project>{016991b4-c1c1-407b-837b-11b9ce1c1a26}</Project>
-      <Name>writeline</Name>
+      <Name>WriteLine</Name>
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
