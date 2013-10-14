@@ -108,6 +108,17 @@ namespace Shake
             }
             return task.Execute();
         }
+        public void Execute(IEnumerable<string> args) 
+        {
+            foreach (var arg in args)
+            {
+                var retval = ExecuteTasksWithName(arg);
+                if (retval != 0)
+                {
+                    Environment.Exit(retval);
+                }
+            }
+        }
     }
 
 }

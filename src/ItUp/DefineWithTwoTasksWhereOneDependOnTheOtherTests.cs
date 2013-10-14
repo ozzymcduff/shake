@@ -76,5 +76,6 @@ namespace Shake.It.Up
             Assert.That(checkExecuted);
             Assert.That(!buildExecuted);
         }
+
     }
 }
