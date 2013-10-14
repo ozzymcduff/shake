@@ -42,6 +42,7 @@
     <Reference Include="Microsoft.CSharp" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="DefineWithThreeTasksWhereTwoDependsOnOne.cs" />
     <Compile Include="DefineWithTwoTasksWhereOneDependOnTheOtherTests.cs" />
     <Compile Include="FailingRunCommandsTest.cs" />
     <Compile Include="SuccessfulRunCommandsTest.cs" />

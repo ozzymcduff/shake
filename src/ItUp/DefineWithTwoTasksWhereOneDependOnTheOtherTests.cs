@@ -32,7 +32,8 @@ namespace Shake.It.Up
                     {
                         Solution = @"C:\project\somesolution.sln",
                         MaxCpuCount = 2,
-                        Properties = new { }
+                        Properties = new { },
+                        Targets = new[] { "Clean", "Build" }
                     };
                 }, "Check");
             });

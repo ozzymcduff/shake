@@ -29,10 +29,16 @@ end
 desc "create the nuget package"
 task :nugetpack => [:core_nugetpack]
 
-task :core_nugetpack => [:core_copy_to_nuspec] do |nuget|
-  cd File.join(dir,"nuget") do
-    sh "..\\src\\.nuget\\NuGet.exe pack Shake.nuspec"
-  end
+def nuget_exe
+  ".\\src\\.nuget\\NuGet.exe"
+end
+
+nugetpack :core_nugetpack => [:core_copy_to_nuspec] do |nuget|
+  nugetfolder = File.join(dir,"nuget")
+  nuget.command = nuget_exe
+  nuget.base_folder = nugetfolder
+  nuget.output = nugetfolder
+  nuget.nuspec = File.join(nugetfolder,'Shake.nuspec')
 end
 
 desc "Install missing NuGet packages."
