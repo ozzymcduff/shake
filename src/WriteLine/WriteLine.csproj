@@ -7,8 +7,8 @@
     <ProjectGuid>{016991B4-C1C1-407B-837B-11B9CE1C1A26}</ProjectGuid>
     <OutputType>Exe</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>writeline</RootNamespace>
-    <AssemblyName>writeline</AssemblyName>
+    <RootNamespace>WriteLine</RootNamespace>
+    <AssemblyName>WriteLine</AssemblyName>
     <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <TargetFrameworkProfile />

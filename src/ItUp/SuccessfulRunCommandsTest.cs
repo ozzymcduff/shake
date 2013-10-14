@@ -16,7 +16,7 @@ namespace Shake.It.Up
         {
             _out = new StringWriter();
             _error = new StringWriter();
-            _runCommand = new RunCommand() { FileName = "writeline.exe",Params=new{Test="value"}, Out = _out, Error = _error };
+            _runCommand = new RunCommand() { FileName = "WriteLine.exe",Params=new{Test="value"}, Out = _out, Error = _error };
             _exitstatus = _runCommand.Execute();
             Console.WriteLine(_out.ToString());
             Console.WriteLine(_error.ToString());
