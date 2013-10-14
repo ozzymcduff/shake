@@ -4,36 +4,34 @@ using Shake.Infrastructure;
 
 namespace Shake
 {
-    public class MsBuild:Task
+    public class MsBuild : Task
     {
         public string Solution { get; set; }
         public string Verbosity { get; set; }
         public string Loggermodule { get; set; }
         public int? MaxCpuCount { get; set; }
         public string[] Targets { get; set; }
-        public object Properties
-        {
-            get { throw new NotImplementedException("!"); }
-            set { _properties = ReflectionHelper.ObjectToDictionary(value); }
-        }
-
-        private IDictionary<string, object> _properties;
+        private IDictionary<string, object> _otherSwitches;
         public object OtherSwitches
         {
             get { throw new NotImplementedException("!"); }
             set { _otherSwitches = ReflectionHelper.ObjectToDictionary(value); }
         }
-
-        private IDictionary<string, object> _otherSwitches;
         private bool _nologo = false;
+        private IDictionary<string, object> _properties;
+        public object Properties
+        {
+            get { throw new NotImplementedException("!"); }
+            set { _properties = ReflectionHelper.ObjectToDictionary(value); }
+        }
+        public bool NoLogo
+        {
+            get { return _nologo; }
+            set { _nologo = value; }
+        }
         public override int Execute()
         {
             return BuildSolution(Solution);
-        }
-
-        public void NoLogo()
-        {
-            _nologo = true;
         }
 
         public int BuildSolution(string solution)
