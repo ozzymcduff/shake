@@ -1,0 +1,20 @@
+<?xml version="1.0"?>
+<package >
+  <metadata>
+    <id>Shake</id>
+    <title>Shake</title>
+    <version>0.1.0</version>
+    <authors>Oskar Gewalli</authors>
+    <owners>Oskar Gewalli</owners>
+    <licenseUrl>http://www.apache.org/licenses/LICENSE-2.0</licenseUrl>
+    <projectUrl>https://github.com/wallymathieu/shake</projectUrl>
+    <requireLicenseAcceptance>false</requireLicenseAcceptance>
+    <description>Shake is make in c#.</description>
+    <copyright>Copyright 2013</copyright>
+    <references>
+      <reference file="Shake.dll" />
+    </references>
+    <releaseNotes>Early version of make files for c#.
+    </releaseNotes>
+  </metadata>
+</package>
