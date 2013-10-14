@@ -37,14 +37,11 @@
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
-    <Reference Include="System.Xml.Linq" />
-    <Reference Include="System.Data.DataSetExtensions" />
     <Reference Include="Microsoft.CSharp" />
-    <Reference Include="System.Data" />
-    <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
     <Compile Include="DefineWithTwoTasksWhereOneDependOnTheOtherTests.cs" />
+    <Compile Include="FailingRunCommandsTest.cs" />
     <Compile Include="SuccessfulRunCommandsTest.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="TaskTests.cs" />
@@ -53,6 +50,10 @@
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\FailWithError\FailWithError.csproj">
+      <Project>{7b3d8097-dfa1-4f6f-ac32-e685474e30ce}</Project>
+      <Name>FailWithError</Name>
+    </ProjectReference>
     <ProjectReference Include="..\shake\Shake.csproj">
       <Project>{B8141FE0-8CB6-4B7E-A68A-C9578D9FA760}</Project>
       <Name>Shake</Name>

@@ -9,6 +9,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ItUp", "ItUp\ItUp.csproj", 
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WriteLine", "WriteLine\WriteLine.csproj", "{016991B4-C1C1-407B-837B-11B9CE1C1A26}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FailWithError", "FailWithError\FailWithError.csproj", "{7B3D8097-DFA1-4F6F-AC32-E685474E30CE}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -27,6 +29,10 @@ Global
 		{016991B4-C1C1-407B-837B-11B9CE1C1A26}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{016991B4-C1C1-407B-837B-11B9CE1C1A26}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{016991B4-C1C1-407B-837B-11B9CE1C1A26}.Release|Any CPU.Build.0 = Release|Any CPU
+		{7B3D8097-DFA1-4F6F-AC32-E685474E30CE}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{7B3D8097-DFA1-4F6F-AC32-E685474E30CE}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{7B3D8097-DFA1-4F6F-AC32-E685474E30CE}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{7B3D8097-DFA1-4F6F-AC32-E685474E30CE}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

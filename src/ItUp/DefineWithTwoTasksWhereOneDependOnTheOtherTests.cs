@@ -38,6 +38,14 @@ namespace Shake.It.Up
             });
         }
 
+        [TearDown]
+        public void Cleanup()
+        {
+            definition = null;
+            checkExecuted = false;
+            buildExecuted = false;
+        }
+
         [Test]
         public void It_should_setup_definition()
         {
