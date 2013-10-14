@@ -88,14 +88,19 @@ namespace Shake
                                     RedirectStandardOutput = true,
                                     RedirectStandardError = true,
                                     UseShellExecute = false,
-                                    Arguments = Arguments + " " + DoRenderParams()
+                                    Arguments = Arguments + " " + DoRenderParams(),
                                 };
             try
             {
-                using (Process exeProcess = Process.Start(startInfo))
+                using (Process exeProcess = new Process())
                 {
-                    Out.WriteLine(exeProcess.StandardOutput.ReadToEnd());
-                    Error.WriteLine(exeProcess.StandardError.ReadToEnd());
+                    exeProcess.StartInfo = startInfo;
+                    exeProcess.ErrorDataReceived += ErrorDataReceived;
+                    exeProcess.OutputDataReceived += OutputDataReceived;
+                    exeProcess.EnableRaisingEvents = true;
+                    exeProcess.Start();
+                    exeProcess.BeginOutputReadLine();
+                    exeProcess.BeginErrorReadLine();
                     exeProcess.WaitForExit();
                     return exeProcess.ExitCode;
                 }
@@ -105,6 +110,16 @@ namespace Shake
                 Error.WriteLine(e.Message);
                 return 1;
             }
+        }
+
+        private void OutputDataReceived(object sender, DataReceivedEventArgs e)
+        {
+            Out.WriteLine(e.Data);
+        }
+
+        private void ErrorDataReceived(object sender, DataReceivedEventArgs e)
+        {
+            Error.WriteLine(e.Data);
         }
 
         private string DoRenderParams()
