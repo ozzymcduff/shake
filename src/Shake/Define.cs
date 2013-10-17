@@ -95,12 +95,17 @@ namespace Shake
             }
         }
 
-        public int ExecuteTasksWithName(string name)
+        public int ExecuteTasksWithName(string name, HashSet<string> alreadyExecuted=null)
         {
+            if (alreadyExecuted==null) alreadyExecuted = new HashSet<string>(StringComparer.InvariantCultureIgnoreCase);
+            if (alreadyExecuted.Contains(name)) 
+                return 0;
+
+            alreadyExecuted.Add(name);
             var task = _tasks[name];
             foreach (var dependingTask in task.DependsOn)
             {
-                var retval = ExecuteTasksWithName(dependingTask);
+                var retval = ExecuteTasksWithName(dependingTask, alreadyExecuted);
                 if (retval != 0) 
                 {
                     return retval;
@@ -110,9 +115,11 @@ namespace Shake
         }
         public void Execute(IEnumerable<string> args) 
         {
+            var alreadyExecuted = new HashSet<string>();
+
             foreach (var arg in args)
             {
-                var retval = ExecuteTasksWithName(arg);
+                var retval = ExecuteTasksWithName(arg, alreadyExecuted);
                 if (retval != 0)
                 {
                     Environment.Exit(retval);
