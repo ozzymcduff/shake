@@ -26,3 +26,10 @@ To execute this you need to use a bit of convoluted syntax, but hey it works on 
 
     scriptcs .\shakefile.csx -- build
     
+## Alternatives
+
+rake with albacore
+
+Nake:
+https://github.com/yevhen/Nake
+(I've not tried it yet)
