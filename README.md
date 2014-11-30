@@ -25,13 +25,16 @@ Then you can write your first shakefile.csx :
 To execute this you need to use a bit of convoluted syntax, but hey it works on my machine ;)
 
     scriptcs .\shakefile.csx -- build
+
+## About
+
+I wrote this as a joke about build scripts in c# (since there at that time wasnt any).
+
+No one else has done any pull requests to this project, so it's probably better to use some alternative.
     
 ## Alternatives
 
-rake with albacore
-
-Nake:
-https://github.com/yevhen/Nake
-Cake:
-https://github.com/cake-build/cake
-(I've not tried any of those yet)
+- rake with [albacore](https://github.com/Albacore/albacore)
+- [Nake](https://github.com/yevhen/Nake) (I've not tried it)
+- [Cake](https://github.com/cake-build/cake)
+- grunt
