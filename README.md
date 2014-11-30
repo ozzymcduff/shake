@@ -28,7 +28,7 @@ To execute this you need to use a bit of convoluted syntax, but hey it works on 
 
 ## About
 
-I wrote this as a joke about build scripts in c# (since there at that time wasnt any).
+I wrote this as a joke about build scripts in c# (since at that time there wasn't any that we knew of).
 
 No one else has done any pull requests to this project, so it's probably better to use some alternative.
     
