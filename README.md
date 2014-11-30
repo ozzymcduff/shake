@@ -32,4 +32,6 @@ rake with albacore
 
 Nake:
 https://github.com/yevhen/Nake
-(I've not tried it yet)
+Cake:
+https://github.com/cake-build/cake
+(I've not tried any of those yet)
