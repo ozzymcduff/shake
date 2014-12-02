@@ -36,5 +36,6 @@ No one else has done any pull requests to this project, so it's probably better 
 
 - rake with [albacore](https://github.com/Albacore/albacore)
 - [Nake](https://github.com/yevhen/Nake) (I've not tried it)
+- [Sake](https://github.com/sakeproject/sake/) (I've not tried it)
 - [Cake](https://github.com/cake-build/cake)
 - grunt
